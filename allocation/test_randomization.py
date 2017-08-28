@@ -2,7 +2,7 @@
 """
 
 import pytest
-import allocation.randomization as r
+import allocation as r
 
 
 def run_length(result):

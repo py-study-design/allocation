@@ -2,7 +2,7 @@
 """
 
 import pytest
-import allocation.adaptive_allocation as alloc
+import allocation as alloc
 
 
 def test_minimization():

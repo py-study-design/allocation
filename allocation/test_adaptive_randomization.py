@@ -2,7 +2,7 @@
 """
 
 import pytest
-import allocation.adaptive_randomization as r
+import allocation as r
 
 
 def test_double_biased_coin_minimize():
