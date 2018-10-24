@@ -2,7 +2,7 @@ import random
 
 
 # Minimization
-def minimization(current_tally, group_labels=None):
+def minimization(current_tally, group_labels=None, seed=None):
     """ Returns a group assignment for adaptive trials using the Minimization
 
     Minimization attemts to minimize imbalance within a set of factors between
@@ -40,6 +40,8 @@ def minimization(current_tally, group_labels=None):
     Return:
         group: the group label for the next allocation
     """
+    if seed is not None:
+        random.seed(seed)
     n_treatments = len(current_tally)
     if n_treatments < 2:
         raise ValueError('current_tally must be a list of lists whose length is greater than 2.')
@@ -60,12 +62,19 @@ def minimization(current_tally, group_labels=None):
         sums[idx] = sum(tally)
     if sum(sums) == 0:
         # No assignment made yet, so make one at random
-        idx = random.randind(0, n_treatments - 1)
+        idx = random.randint(0, n_treatments - 1)
     else:
-        idx, _ = min(enumerate(sums), key=lambda v: v[1])
+        min_value = min(sums)
+        groups = [i for i, j in enumerate(sums) if j == min_value]
+        if len(groups) > 1:
+            idx = random.choice(groups)
+        else:
+            idx = groups[0]
 
     if group_labels:
+        print(group_labels)
         group = group_labels[idx]
     else:
         group = idx + 1
+    print(group)
     return group

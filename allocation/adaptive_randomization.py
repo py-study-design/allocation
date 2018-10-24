@@ -5,6 +5,7 @@ assignments to be used in clinical trials
 
 import math
 import random
+import scipy.stats as stats
 
 
 # A Response addaptive randomization technique
@@ -150,4 +151,49 @@ def double_biased_coin_urn(control_success, control_trials,
         group = control_name
     else:
         group = treatment_name
+    return group
+
+
+def multi_arm_bandit(k, successes, failures, t=None, T=None, prior_alpha=None, prior_beta=None, seed=None, method=None):
+    if prior_alpha is None:
+        prior_alpha = 0.5
+    if prior_beta is None:
+        prior_beta = 0.5
+    if seed is None:
+        seed = 79461734
+    if method is None:
+        method = "Current Belief"
+    if t is None:
+        t = sum(successes) + sum(failures)
+    random.seed(seed)
+
+    posterior_alphas = [prior_alpha + s for s in successes]
+    posterior_betas = [prior_beta + f for f in failures]
+
+    if method == 'Current Belief':
+        post_means = [a / (a + b) for a, b in zip(posterior_alphas, posterior_betas)]
+        max_value = max(post_means)
+        groups = [i for i, j in enumerate(post_means) if j == max_value]
+        if len(groups) > 1:
+            group = random.choice(groups)
+        else:
+            group = groups[0]
+    elif method == "Thompson":
+        c = t / 2 * T
+    elif method == "UCB":
+        if t == 0:
+            groups = list(range(k))
+        else:
+            idxs = [None] * k
+            for group in range(k):
+                num = prior_alpha + successes[group]
+                denom = prior_alpha + prior_beta + successes[group] + failures[group]
+                idx = num / denom + math.sqrt((2 * math.log(t)) / denom)
+                idxs[group] = idx
+            max_value = max(idxs)
+            groups = [i for i, j in enumerate(idxs) if j == max_value]
+        if len(groups) > 1:
+            group = random.choice(groups)
+        else:
+            group = groups[0]
     return group
