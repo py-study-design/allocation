@@ -1,0 +1,2 @@
+from .double_biased_coin import double_biased_coin_minimize, double_biased_coin_urn
+from .multi_arm_bandit import multi_arm_bandit

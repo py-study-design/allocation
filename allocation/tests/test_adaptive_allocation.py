@@ -1,8 +1,7 @@
 """ Test Cases for Adaptive Allocation module
 """
 
-import pytest
-import allocation as alloc
+from ..adaptive_allocation import minimization
 
 
 def test_minimization():
@@ -10,8 +9,8 @@ def test_minimization():
     counts = [[10, 9], [2, 2]]
     names = ['Treatment 1', 'Treatment 2']
 
-    result = alloc.minimization(counts)
+    result = minimization(counts)
     assert result == 2
 
-    result = alloc.minimization(counts, group_labels=names)
+    result = minimization(counts, group_labels=names)
     assert result == 'Treatment 2'
