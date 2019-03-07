@@ -8,7 +8,7 @@ import numbers
 
 
 def cumsum(numbers):
-    """ Calculates the cumulative sum of a numeric list.
+    """Calculates the cumulative sum of a numeric list.
 
     This function operates on the list *in place*.
 
@@ -28,7 +28,7 @@ def cumsum(numbers):
 
 
 def max_deviation(lst, values):
-    """ Calculate the maximum devation of a list of values
+    """Calculate the maximum devation of a list of values
 
     Maximum deviation for group :math:`g`: at the :math:`i^{th}` assignment
     is defined as:
@@ -66,7 +66,7 @@ def max_deviation(lst, values):
 
 
 def simple(n_subjects, n_groups, p=None, seed=None):
-    """ Create a randomization list using simple randomization.
+    """Create a randomization list using simple randomization.
 
     Simple randomization randomly assigns each new subject to a group
     independent of the assignment of the previous members.
@@ -116,9 +116,10 @@ def simple(n_subjects, n_groups, p=None, seed=None):
     return groups
 
 
-def simple_max_deviation(n_subjects, max_allowed_deviation=None,
-                         max_iterations=None, seed=None):
-    """ Create a randomization list using simple randomization.
+def simple_max_deviation(
+    n_subjects, max_allowed_deviation=None, max_iterations=None, seed=None
+):
+    """Create a randomization list using simple randomization.
 
 
     Simple randomization randomly assigns each new subject to a group
@@ -162,7 +163,7 @@ def simple_max_deviation(n_subjects, max_allowed_deviation=None,
     elif not isinstance(max_iterations, int) or max_iterations <= 0:
         raise ValueError("`max_iterations` must be a postive integer.")
 
-    for iteration in range(max_iterations):
+    for _ in range(max_iterations):
         groups = simple(n_subjects, 2)
 
         candidate_max_deviation = max_deviation(groups, [1, 2])
@@ -172,7 +173,7 @@ def simple_max_deviation(n_subjects, max_allowed_deviation=None,
 
 
 def complete(subjects, seed=None):
-    """ Create a randomization list using complete randomization.
+    """Create a randomization list using complete randomization.
 
     Complete randomization randomly shuffles a list of group labels.  This
     ensures that the resultant list is retains the exact balance desired.
@@ -203,38 +204,40 @@ def complete(subjects, seed=None):
     return groups
 
 
-def complete_max_deviation(subjects, max_allowed_deviation=None,
-                           max_iterations=None, seed=None):
-    """ Create a randomization list using complete randomization.
+def complete_max_deviation(
+    subjects, max_allowed_deviation=None, max_iterations=None, seed=None
+):
+    """Create a randomization list using complete randomization.
 
-    Complete randomization randomly shuffles a list of group labels.  This
-    ensures that the resultant list is retains the exact balance desired.
-    This randomization is done in place.
+    Complete randomization randomly shuffles a list of group labels.
+    This ensures that the resultant list is retains the exact balance
+    desired. This randomization is done in place.
 
-    This function performs complete randomization but ensures that the deviation
-    is kept below a specified limit (between 0 and 1).
+    This function performs complete randomization but ensures that
+    the deviation is kept below a specified limit (between 0 and 1).
 
     Args:
         subjects: A list of group labels to randomize.
-        max_allowed_deviation: (optional) The maximum deviation allowed. The
-            default is 0.20 (20%).
-        max_iterations: (optional) The maximum number of tries to find a
-            list that satisfies the `max_deviation` criteria.  The default
-            is 100.
+        max_allowed_deviation: (optional) The maximum deviation
+            allowed. The default is 0.20 (20%).
+        max_iterations: (optional) The maximum number of tries to find
+            a list that satisfies the `max_deviation` criteria.  The
+            default is 100.
         seed: (optional) The seed to provide to the RNG.
 
     Returns:
-        list: a list of length `len(subjects)` of the group labels of the
-            subjects.
+        list: a list of length `len(subjects)` of the group labels of
+            the subjects.
 
     Raises:
         ValueError: If the length of `max_deviation` is not in [0, 1].
         ValueError: If the length of `max_iterations` is not an integer.
 
     Notes:
-        Complete Randomization is prone to long runs of a single group.  By
-        setting a maximum deviation, you can avoid that.  However, the lower
-        the maximum deviation and the greated the number of subjects
+        Complete Randomization is prone to long runs of a single group.
+        By setting a maximum deviation, you can avoid that.  However,
+        the lower the maximum deviation and the greated the number of
+        subjects
     """
 
     random.seed(seed)
@@ -253,7 +256,7 @@ def complete_max_deviation(subjects, max_allowed_deviation=None,
 
     # We do not want to do the shuffle in place because it would break with
     # the pattern of the rest of the randomization functions
-    for iteration in range(max_iterations):
+    for _ in range(max_iterations):
         groups = subjects[:]
         random.shuffle(groups)
 
@@ -264,7 +267,7 @@ def complete_max_deviation(subjects, max_allowed_deviation=None,
 
 
 def block(n_subjects, n_groups, block_length, seed=None):
-    """ Create a randomization list using block randomization.
+    """Create a randomization list using block randomization.
 
     Block randomization takes blocks of group labels of length `block_length`,
     shuffles them and adds them to the randomization list.  This is done to
@@ -307,7 +310,7 @@ def block(n_subjects, n_groups, block_length, seed=None):
 
 
 def random_block(n_subjects, n_groups, block_lengths, seed=None):
-    """ Create a randomization list by block randomization with random blocks.
+    """Create a randomization list by block randomization with random blocks.
 
     Block randomization takes blocks of group labels of length `block_length`,
     shuffles them and adds them to the randomization list.  This is done to
@@ -357,7 +360,7 @@ def random_block(n_subjects, n_groups, block_lengths, seed=None):
 
 
 def random_treatment_order(n_subjects, n_treatments, seed=None):
-    """ Create a randomization list for studies where the subject recieves
+    """Create a randomization list for studies where the subject recieves
     multiple treatments.
 
     If a subject will recieve multiple treatments, those treatments should be
@@ -385,7 +388,7 @@ def random_treatment_order(n_subjects, n_treatments, seed=None):
 
 
 def efrons_biased_coin(n_subjects, bias=None, seed=None):
-    """ Create a randomization list using Efron's Biased Coin
+    """Create a randomization list using Efron's Biased Coin
 
     Efron's Biased Coin weights the assignment of a new subject by adjusting
     the probability of the Bernoulli random variable used to determine the next
@@ -419,7 +422,7 @@ def efrons_biased_coin(n_subjects, bias=None, seed=None):
     group_0_count = 0.0
     groups = []
     for i in range(0, n_subjects):
-        if group_0_count / (i + 1) == 0.5 or i is 0:
+        if (group_0_count / (i + 1)) == 0.5 or i == 0:
             # Balance
             cut = 0.5
         elif group_0_count / (i + 1) < 0.5:
@@ -440,7 +443,7 @@ def efrons_biased_coin(n_subjects, bias=None, seed=None):
 
 
 def smiths_exponent(n_subjects, exponent=None, seed=None):
-    """ Create a randomization list using Smith's Exponent
+    """Create a randomization list using Smith's Exponent
 
     Smith's Exponent weights the assignment of a new subject by adjusting
     the probability of the Bernoulli random variable used to determine the next
@@ -484,8 +487,8 @@ def smiths_exponent(n_subjects, exponent=None, seed=None):
     groups = []
     for i in range(0, n_subjects):
         # The plus one is to account for zero indexing.
-        denom = group_0_count**exponent + (i + 1 - group_0_count)**exponent
-        cut = group_0_count**exponent / denom
+        denom = group_0_count ** exponent + (i + 1 - group_0_count) ** exponent
+        cut = group_0_count ** exponent / denom
 
         test = random.random()
         if test > cut:
@@ -499,7 +502,7 @@ def smiths_exponent(n_subjects, exponent=None, seed=None):
 
 
 def weis_urn(n_subjects, seed=None):
-    """ Create a randomization list using Wei's Urn.
+    """Create a randomization list using Wei's Urn.
 
     Wei's Urn weights the assignment of a new subject by adjusting the
     probability of the Bernoulli random variable used to determine the next
@@ -543,13 +546,13 @@ def weis_urn(n_subjects, seed=None):
         else:
             group = 2
         groups.append(group)
-        if group is 1:
+        if group == 1:
             group_0_count += 1
     return groups
 
 
 def stratification(n_subjects_per_strata, n_groups, block_length=4, seed=None):
-    """ Create a randomization list for each strata using Block Randomization.
+    """Create a randomization list for each strata using Block Randomization.
 
     If a study has several strata, each strata is seperately randomized using
     block randomization.
@@ -581,6 +584,5 @@ def stratification(n_subjects_per_strata, n_groups, block_length=4, seed=None):
         # reproducibility
         if seed is not None:
             seed = seed + 52490
-        groups.append(block(n_subjects_per_stratum, n_groups,
-                            block_length, seed))
+        groups.append(block(n_subjects_per_stratum, n_groups, block_length, seed))
     return groups

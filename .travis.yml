@@ -1,0 +1,29 @@
+language: python
+
+python:
+- 3.7
+
+dist: xenial
+
+sudo: true
+
+install:
+- pip install --upgrade pip
+- pip install flake8 coverage codecov tox-travis pytest pytest-cov
+
+before_script:
+- flake8 allocation
+
+script:
+- pytest --cov=allocation
+
+after_success:
+- codecov
+
+matrix:
+  include:
+    - python: 3.6
+      env: TOXENV=py36
+    - python: 3.7
+      env: TOXENV=py37
+      

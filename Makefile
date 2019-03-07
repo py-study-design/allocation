@@ -21,3 +21,6 @@ lint:
 
 test:
 	py.test allocation
+	
+format:
+    black allocation
