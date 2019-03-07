@@ -2,8 +2,17 @@ import math
 import random
 
 
-def multi_arm_bandit(k, successes, failures, t=None, T=None, prior_alpha=None,
-                     prior_beta=None, seed=None, method=None):
+def multi_arm_bandit(
+    k,
+    successes,
+    failures,
+    t=None,
+    T=None,
+    prior_alpha=None,
+    prior_beta=None,
+    seed=None,
+    method=None,
+):
     prior_alpha = prior_alpha or 0.5
     prior_beta = prior_beta or 0.5
     seed = seed or 79461734
@@ -15,9 +24,8 @@ def multi_arm_bandit(k, successes, failures, t=None, T=None, prior_alpha=None,
     posterior_alphas = [prior_alpha + s for s in successes]
     posterior_betas = [prior_beta + f for f in failures]
 
-    if method == 'Current Belief':
-        post_means = [a / (a + b)
-                      for a, b in zip(posterior_alphas, posterior_betas)]
+    if method == "Current Belief":
+        post_means = [a / (a + b) for a, b in zip(posterior_alphas, posterior_betas)]
         max_value = max(post_means)
         groups = [i for i, j in enumerate(post_means) if j == max_value]
         if len(groups) > 1:
@@ -33,8 +41,7 @@ def multi_arm_bandit(k, successes, failures, t=None, T=None, prior_alpha=None,
             idxs = [None] * k
             for group in range(k):
                 num = prior_alpha + successes[group]
-                denom = prior_alpha + prior_beta + \
-                    successes[group] + failures[group]
+                denom = prior_alpha + prior_beta + successes[group] + failures[group]
                 idx = num / denom + math.sqrt((2 * math.log(t)) / denom)
                 idxs[group] = idx
             max_value = max(idxs)

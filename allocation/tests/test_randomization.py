@@ -40,7 +40,7 @@ def test_cumsum():
     numbers = [1, 2, 3]
     one_as_list = [1]
     empty_list = []
-    letters = ['a', 'b']
+    letters = ["a", "b"]
     cumsum(numbers)
     cumsum(one_as_list)
     cumsum(empty_list)
@@ -48,22 +48,80 @@ def test_cumsum():
     assert numbers == [1, 3, 6]
     assert one_as_list == [1]
     assert empty_list == []
-    assert letters == ['a', 'ba']
+    assert letters == ["a", "ba"]
 
 
 def test_max_deviation():
     """ Test cases for max_deviation function """
-    labels = ['a', 'b', 'c']
-    subjects = ['c', 'a', 'b', 'c', 'c', 'a', 'c', 'b', 'a', 'b',
-                'a', 'a', 'a', 'c', 'b', 'b', 'c', 'c', 'b', 'a',
-                'c', 'a', 'a', 'b', 'c', 'b', 'c', 'b', 'a', 'b']
+    labels = ["a", "b", "c"]
+    subjects = [
+        "c",
+        "a",
+        "b",
+        "c",
+        "c",
+        "a",
+        "c",
+        "b",
+        "a",
+        "b",
+        "a",
+        "a",
+        "a",
+        "c",
+        "b",
+        "b",
+        "c",
+        "c",
+        "b",
+        "a",
+        "c",
+        "a",
+        "a",
+        "b",
+        "c",
+        "b",
+        "c",
+        "b",
+        "a",
+        "b",
+    ]
     max_dev = max_deviation(subjects, labels)
     assert abs(max_dev - 0.167) < 0.01
 
     labels = [1, 2, 3]
-    subjects = [3, 1, 2, 3, 3, 1, 3, 2, 1, 2,
-                1, 1, 1, 3, 2, 2, 3, 3, 2, 1,
-                3, 1, 1, 2, 3, 2, 3, 2, 1, 2]
+    subjects = [
+        3,
+        1,
+        2,
+        3,
+        3,
+        1,
+        3,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        3,
+        2,
+        2,
+        3,
+        3,
+        2,
+        1,
+        3,
+        1,
+        1,
+        2,
+        3,
+        2,
+        3,
+        2,
+        1,
+        2,
+    ]
     max_dev = max_deviation(subjects, labels)
     assert abs(max_dev - 0.167) < 0.01
 
@@ -79,26 +137,22 @@ def test_simple():
     # Note: This test MAY fail.  It is entirely possible, with a probability
     # of :math:`2^{-n}` where :math:`n` is the number of subjects to randomize
     result = simple(100000, 2)
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert percent_group_1 < 0.52
     assert percent_group_1 > 0.48
 
     result = simple(100000, 2, p=[0.3, 0.7])
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert percent_group_1 < 0.32
     assert percent_group_1 > 0.28
 
     result = simple(100000, 2, p=[0.2, 0.4])
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert percent_group_1 < 0.35
     assert percent_group_1 > 0.31
 
     result = simple(100000, 2, p=[1, 2])
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert percent_group_1 < 0.35
     assert percent_group_1 > 0.31
 
@@ -111,18 +165,17 @@ def test_complete():
     """
 
     # First we test for numeric lists.
-    groups = [1, 2, 1, 1, 2, 1, 2, 1, 2, 1,
-              2, 2, 2, 1, 1, 1, 2, 2, 2, 1, 1, 2, 2]
+    groups = [1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 1, 1, 1, 2, 2, 2, 1, 1, 2, 2]
     result = complete(groups)
     assert not groups == result
 
     # Second we test for character list.
-    groups = ['1', '2', '1', '1', '2', '1', '2' '1', '2']
+    groups = ["1", "2", "1", "1", "2", "1", "2" "1", "2"]
     result = complete(groups)
     assert not groups == result
 
     # Third we test for mixed list.
-    groups = [1, 2, 1, 'a', 'b', 'a', [1, 2]]
+    groups = [1, 2, 1, "a", "b", "a", [1, 2]]
     result = complete(groups)
     assert not groups == result
 
@@ -226,8 +279,7 @@ def test_efrons_biased_coin():
 
     # Test without bias set
     result = efrons_biased_coin(10000)
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert len(result) == 10000
     assert len(set(result)) == 2
     assert percent_group_1 < 0.52
@@ -235,8 +287,7 @@ def test_efrons_biased_coin():
 
     # Test with bias set
     result = efrons_biased_coin(10000, 0.8)
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert len(result) == 10000
     assert len(set(result)) == 2
     assert percent_group_1 < 0.52
@@ -255,30 +306,27 @@ def test_efrons_biased_coin():
 def test_smiths_exponent():
     """ Test Cases for Smith's Exponent Randomization """
     result = smiths_exponent(10000)
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert len(result) == 10000
     assert len(set(result)) == 2
     assert percent_group_1 < 0.52
     assert percent_group_1 > 0.48
 
     result = smiths_exponent(10000, exponent=2)
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert len(result) == 10000
     assert len(set(result)) == 2
     assert percent_group_1 < 0.52
     assert percent_group_1 > 0.48
 
     with pytest.raises(ValueError):
-        smiths_exponent(100, exponent='a')
+        smiths_exponent(100, exponent="a")
 
 
 def test_weis_urn():
     """ Test Cases for Wei's Urn Randomization """
     result = weis_urn(10000)
-    percent_group_1 = (float(sum([value == 1 for value in result])) /
-                       float(len(result)))
+    percent_group_1 = float(sum([value == 1 for value in result])) / float(len(result))
     assert len(result) == 10000
     assert len(set(result)) == 2
     assert percent_group_1 < 0.52

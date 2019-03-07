@@ -1,25 +1,34 @@
 import math
 import random
 
+from .. import CONTROL, TREATMENT
+
 
 class DoubleBiasedCoin(object):
-
-    def __init__(self, control_success, control_trials,
-                 treatment_success, treatment_trials,
-                 control_name=None, treatment_name=None,
-                 seed=None):
+    def __init__(
+        self,
+        control_success,
+        control_trials,
+        treatment_success,
+        treatment_trials,
+        control_name=None,
+        treatment_name=None,
+        seed=None,
+    ):
         if control_trials < control_success:
-            raise ValueError('`control_trials` must be greater than or equal '
-                             'to `control_success`')
+            raise ValueError(
+                "'control_trials' must be greater than or equal to 'control_success'"
+            )
         if treatment_trials < treatment_success:
-            raise ValueError('`treatment_trials` must be greater than or equal '
-                             'to `treatment_success`')
+            raise ValueError(
+                "'treatment_trials' must be greater than or equal "
+                "to 'treatment_success'"
+            )
 
-        self.control_name = control_name or "Control"
-        self.treatment_name = treatment_name or "Treatment"
+        self.control_name = control_name or CONTROL
+        self.treatment_name = treatment_name or TREATMENT
 
-        self.seed = (seed + 10 * control_trials + treatment_trials
-                     if seed else None)
+        self.seed = seed + 10 * control_trials + treatment_trials if seed else None
         random.seed(seed)
 
         if control_trials > 1:

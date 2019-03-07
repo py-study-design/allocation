@@ -3,10 +3,7 @@
 
 import pytest
 
-from ..adaptive_randomization import (
-    double_biased_coin_urn,
-    double_biased_coin_minimize
-)
+from ..adaptive_randomization import double_biased_coin_urn, double_biased_coin_minimize
 
 
 def test_double_biased_coin_minimize():

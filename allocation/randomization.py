@@ -116,8 +116,9 @@ def simple(n_subjects, n_groups, p=None, seed=None):
     return groups
 
 
-def simple_max_deviation(n_subjects, max_allowed_deviation=None,
-                         max_iterations=None, seed=None):
+def simple_max_deviation(
+    n_subjects, max_allowed_deviation=None, max_iterations=None, seed=None
+):
     """Create a randomization list using simple randomization.
 
 
@@ -203,8 +204,9 @@ def complete(subjects, seed=None):
     return groups
 
 
-def complete_max_deviation(subjects, max_allowed_deviation=None,
-                           max_iterations=None, seed=None):
+def complete_max_deviation(
+    subjects, max_allowed_deviation=None, max_iterations=None, seed=None
+):
     """Create a randomization list using complete randomization.
 
     Complete randomization randomly shuffles a list of group labels.
@@ -485,8 +487,8 @@ def smiths_exponent(n_subjects, exponent=None, seed=None):
     groups = []
     for i in range(0, n_subjects):
         # The plus one is to account for zero indexing.
-        denom = group_0_count**exponent + (i + 1 - group_0_count)**exponent
-        cut = group_0_count**exponent / denom
+        denom = group_0_count ** exponent + (i + 1 - group_0_count) ** exponent
+        cut = group_0_count ** exponent / denom
 
         test = random.random()
         if test > cut:
@@ -582,6 +584,5 @@ def stratification(n_subjects_per_strata, n_groups, block_length=4, seed=None):
         # reproducibility
         if seed is not None:
             seed = seed + 52490
-        groups.append(block(n_subjects_per_stratum, n_groups,
-                            block_length, seed))
+        groups.append(block(n_subjects_per_stratum, n_groups, block_length, seed))
     return groups

@@ -46,7 +46,8 @@ class Minimization(object):
         if group_labels is not None:
             if len(group_labels) != self.target_length:
                 raise ValueError(
-                    'group_labels must be {} long'.format(self.target_length))
+                    "group_labels must be {} long".format(self.target_length)
+                )
         self.group_labels = group_labels
         self.seed = seed or random.seed(seed)
 
@@ -87,7 +88,8 @@ class Minimization(object):
             else:
                 if target_length != len(tally):
                     raise ValueError(
-                        'Each list in current_tally must be the same length.')
+                        "Each list in current_tally must be the same length."
+                    )
         return target_length
 
     @property
@@ -95,12 +97,14 @@ class Minimization(object):
         n_treatments = len(self.current_tally)
         if n_treatments < 2:
             raise ValueError(
-                'current_tally must be a list of lists whose length is '
-                'greater than 2.')
+                "current_tally must be a list of lists whose length is "
+                "greater than 2."
+            )
         return n_treatments
 
 
 def minimization(current_tally, group_labels=None, seed=None):
-    minimization = Minimization(current_tally=current_tally,
-                                group_labels=group_labels, seed=seed)
+    minimization = Minimization(
+        current_tally=current_tally, group_labels=group_labels, seed=seed
+    )
     return minimization.group

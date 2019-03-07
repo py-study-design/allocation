@@ -5,14 +5,20 @@ assignments to be used in clinical trials
 
 import math
 import random
+
 # import scipy.stats as stats
 
 
 # A Response adaptive randomization technique
-def double_biased_coin_minimize(control_success, control_trials,
-                                treatment_success, treatment_trials,
-                                control_name=None, treatment_name=None,
-                                seed=None):
+def double_biased_coin_minimize(
+    control_success,
+    control_trials,
+    treatment_success,
+    treatment_trials,
+    control_name=None,
+    treatment_name=None,
+    seed=None,
+):
     """ Returns a group assignment for adaptive trials using the Double Biased
     Coin Minimization method.
 
@@ -47,11 +53,13 @@ def double_biased_coin_minimize(control_success, control_trials,
             the subject is assigned to.
     """
     if control_trials < control_success:
-        raise ValueError('`control_trials` must be greater than or equal '
-                         'to `control_success`')
+        raise ValueError(
+            "`control_trials` must be greater than or equal " "to `control_success`"
+        )
     if treatment_trials < treatment_success:
-        raise ValueError('`treatment_trials` must be greater than or equal '
-                         'to `treatment_success`')
+        raise ValueError(
+            "`treatment_trials` must be greater than or equal " "to `treatment_success`"
+        )
 
     if control_name is None:
         control_name = "Control"
@@ -84,10 +92,15 @@ def double_biased_coin_minimize(control_success, control_trials,
 
 
 # A Response adaptive randomization technique
-def double_biased_coin_urn(control_success, control_trials,
-                           treatment_success, treatment_trials,
-                           control_name=None, treatment_name=None,
-                           seed=None):
+def double_biased_coin_urn(
+    control_success,
+    control_trials,
+    treatment_success,
+    treatment_trials,
+    control_name=None,
+    treatment_name=None,
+    seed=None,
+):
     """ Returns a group assignment for adaptive trials using the Double Biased
     Coin Minimization method.
 
@@ -122,11 +135,13 @@ def double_biased_coin_urn(control_success, control_trials,
             the subject is assigned to.
     """
     if control_trials < control_success:
-        raise ValueError('`control_trials` must be greater than or equal '
-                         'to `control_success`')
+        raise ValueError(
+            "`control_trials` must be greater than or equal " "to `control_success`"
+        )
     if treatment_trials < treatment_success:
-        raise ValueError('`treatment_trials` must be greater than or equal '
-                         'to `treatment_success`')
+        raise ValueError(
+            "`treatment_trials` must be greater than or equal " "to `treatment_success`"
+        )
 
     if control_name is None:
         control_name = "Control"
