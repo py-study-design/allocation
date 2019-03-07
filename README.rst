@@ -33,6 +33,8 @@ The next person to be assigned to a treatment is an Hispanic Female.
 
 To perform the minimization, we add up the number of Hispanic and Females assigned to each treatment.  Treatment 1 has ``10 + 2 = 12``.  Treatment 2 has ``9 + 2 = 11``.  Since ``11 < 12``, we assign the new subject to Treatment 2.
 
+Double Biased Coin Minimization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Returns a group assignment for adaptive trials using the Double Biased Coin Minimization method.
 
