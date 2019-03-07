@@ -33,16 +33,13 @@ class DoubleBiasedCoin(object):
 
     def minimize(self):
         cut = math.sqrt(self.p_c) / (math.sqrt(self.p_c) + math.sqrt(self.p_t))
-        test = random.random()
-
-        if test < cut:
-            group = self.control_name
-        else:
-            group = self.treatment_name
-        return group
+        return self.get_group(cut)
 
     def urn(self):
         cut = (1 - self.p_t) / ((1 - self.p_t) + (1 - self.p_c))
+        return self.get_group(cut)
+
+    def get_group(self, cut):
         test = random.random()
         if test < cut:
             group = self.control_name
