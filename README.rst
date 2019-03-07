@@ -8,8 +8,14 @@ Functions to allocate new subjects to a trial either by randomization or adaptiv
 Note: This is a work in progress.
 
 
+To install:
+
+.. code-block:: bash
+
+	pip install allocation
+
 Minimization
-~~~~~~~~~~~
+~~~~~~~~~~~~
 
 Minimization attempts to minimize imbalance within a set of factors between a group of treatments.
 
@@ -48,6 +54,24 @@ The next subject will be randomized to the control group with probability:
 
 .. math::
     \\frac{\sqrt{p_{c}}}{\\sqrt{p_{c}} + \\sqrt{p_{t}}}
+
+Double Biased Coin Urn
+~~~~~~~~~~~~~~~~~~~~~~
+
+Returns a group assignment for adaptive trials using the Double Biased Coin Urn method.
+
+Suppose that :math:`N_{c}` is the number of controls, of which :math:`S_{c}` were successes and :math:`N_{t}` is the number of treatments, of which :math:`S_{t}` were successes.  We can define the probability of success as:
+
+.. math::
+    p_{c} = \\frac{S_{c}}{N_{c}}
+    p_{t} = \\frac{S_{t}}{N_{t}}
+
+The next subject will be randomized to the control group with probability:
+
+.. math::
+    \\frac{1 - p_{t}}{(1 - p_{c}) + (1 - p_{t})}
+
+
 
 .. |pypi| image:: https://img.shields.io/pypi/v/allocation.svg
     :target: https://pypi.python.org/pypi/allocation
