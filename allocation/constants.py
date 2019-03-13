@@ -1,0 +1,2 @@
+CONTROL = "Control"
+TREATMENT = "Treatment"

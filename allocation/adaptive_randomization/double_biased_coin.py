@@ -1,7 +1,7 @@
 import math
 import random
 
-from .. import CONTROL, TREATMENT
+from ..constants import CONTROL, TREATMENT
 
 
 class DoubleBiasedCoin(object):
