@@ -76,11 +76,11 @@ The next subject will be randomized to the control group with probability:
 .. |pypi| image:: https://img.shields.io/pypi/v/allocation.svg
     :target: https://pypi.python.org/pypi/allocation
     
-.. |travis| image:: https://travis-ci.com/erikvw/allocation.svg?branch=setup_tox
-    :target: https://travis-ci.com/erikvw/allocation
+.. |travis| image:: https://travis-ci.com/py-study-design/allocation.svg?branch=setup_tox
+    :target: https://travis-ci.com/py-study-design/allocation
     
-.. |codecov| image:: https://codecov.io/gh/erikvw/allocation/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/erikvw/allocation
+.. |codecov| image:: https://codecov.io/gh/py-study-design/allocation/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/py-study-design/allocation
 
 .. |downloads| image:: https://pepy.tech/badge/allocation
    :target: https://pepy.tech/project/allocation

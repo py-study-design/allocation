@@ -5,6 +5,3 @@ from .adaptive_randomization import (
     multi_arm_bandit,
 )
 from .randomization import *  # noqa
-
-CONTROL = "Control"
-TREATMENT = "Treatment"
